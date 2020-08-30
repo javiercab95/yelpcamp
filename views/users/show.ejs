@@ -1,0 +1,29 @@
+<%- include("../partials/header") %>
+
+<h2><%= user.firstName + " " + user.lastName %></h2>
+<div class="row">
+	<div class="col-md-4">
+		<div class="thumbnail">
+			<img src="<%= user.avatar %>" width="500" height="350" alt="user profile image">
+			<div class="caption">
+				<a href="mailto:<%= user.email %>"><%= user.email %></a>
+			</div>
+		</div>
+				<label for="bio">Bio</label> 
+           		<textarea class="form-control" type="bio" name="bio" rows="5" placeholder="Write a short description of yourself and what you enjoy about camping."></textarea>	
+	</div>
+	<div class="col-md-8 text-center">
+		<h4>Campgrounds posted by <%= user.username %></h4>
+		<ul class="list-inline mx-auto">
+		<% if(campgrounds.length < 1) { %>
+        <h6 class="mt-4 ml-2"><em>No campgrounds submitted yet...</em></h6> 
+        <% } else { %>
+		<% campgrounds.forEach(function(campground) { %>
+			<li style="font-size: 21px;"><a href="/campgrounds/<%= campground.slug %>"><%= campground.name %></a></li>
+		<% }); %>
+		<% } %>
+		</ul>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>
