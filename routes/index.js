@@ -7,8 +7,7 @@ var express = require("express"),
 var async = require("async");
 var	nodemailer = require("nodemailer");
 var crypto = require("crypto");
-// Set your secret key. Remember to switch to your live secret key in production!
-// See your keys here: https://dashboard.stripe.com/account/apikeys
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 //ROOT ROUTE
@@ -217,7 +216,7 @@ router.post("/pay", middleware.isLoggedIn, async (req, res) => {
   const amount = 2000;
 
   try {
-    // Create new PaymentIntent with a PaymentMethod ID from the client.
+    
     const intent = await stripe.paymentIntents.create({
       amount,
       currency,
@@ -230,14 +229,10 @@ router.post("/pay", middleware.isLoggedIn, async (req, res) => {
 	  
 	req.user.isPaid = true; 
 	await req.user.save();
-    // The payment is complete and the money has been moved
-    // You can add any post-payment code here (e.g. shipping, fulfillment, etc)
-
-    // Send the client secret to the client to use in the demo
+    
     res.send({ clientSecret: intent.client_secret });
   } catch (e) {
-    // Handle "hard declines" e.g. insufficient funds, expired card, card authentication etc
-    // See https://stripe.com/docs/declines/codes for more
+    
     if (e.code === "authentication_required") {
       res.send({
         error:
