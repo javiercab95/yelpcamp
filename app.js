@@ -18,8 +18,20 @@ var indexRoutes 	 = require("./routes/index"),
 	commentRoutes 	 = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds");
 
+var url = process.env.MONGOLAB;
 
-mongoose.connect("mongodb://localhost:27017/yelp_camp", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true});
+//mongodb://localhost:27017/yelp_camp
+mongoose.connect(url, {
+	useNewUrlParser: true, 
+	useUnifiedTopology: true, 
+	useFindAndModify: false, 
+	useCreateIndex: true
+}).then(() => {
+	console.log("Connected to DB");
+}).catch(err => {
+	console.log("ERROR: ", err.message);
+});
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
