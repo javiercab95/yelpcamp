@@ -18,9 +18,8 @@ var indexRoutes 	 = require("./routes/index"),
 	commentRoutes 	 = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds");
 
-var url = process.env.MONGOLAB;
+var url = process.env.MONGOLAB || "/mongodb://localhost:27017/yelp_camp";
 
-//mongodb://localhost:27017/yelp_camp
 mongoose.connect(url, {
 	useNewUrlParser: true, 
 	useUnifiedTopology: true, 
