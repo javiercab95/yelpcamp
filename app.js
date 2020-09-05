@@ -65,6 +65,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:slug/comments", commentRoutes);
 
 //PORT
-app.listen(3000, function(){
-	console.log("The Yelp Camp has started");
+app.listen(process.env.MONGOLAB || 3000, () => {
+   console.log("Server Running!");
 });
