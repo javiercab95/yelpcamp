@@ -65,6 +65,6 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:slug/comments", commentRoutes);
 
 //PORT
-app.listen(process.env.MONGOLAB || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
    console.log("Server Running!");
 });
