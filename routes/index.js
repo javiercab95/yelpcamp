@@ -8,7 +8,7 @@ var async = require("async");
 var	nodemailer = require("nodemailer");
 var crypto = require("crypto");
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_PUBLISHABLE_KEY);
 
 //ROOT ROUTE
 router.get("/", function(req, res){
